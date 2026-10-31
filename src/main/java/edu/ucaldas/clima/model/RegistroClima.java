@@ -1,13 +1,11 @@
 package edu.ucaldas.clima.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @Entity(name = "RegistroClima")
 public class RegistroClima {
 
@@ -29,4 +27,3 @@ public class RegistroClima {
         this.descripcion = descripcion;
     }
 }
-
