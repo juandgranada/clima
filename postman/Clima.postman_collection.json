@@ -1,0 +1,79 @@
+{
+  "info": {
+    "name": "Clima API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8081" },
+    { "key": "ciudadId", "value": "1" },
+    { "key": "estacionId", "value": "1" },
+    { "key": "registroId", "value": "1" },
+    { "key": "rolId", "value": "1" },
+    { "key": "usuarioId", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "Crear ciudad",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Manizales\",\n  \"departamento\": \"Caldas\",\n  \"poblacion\": 454000\n}" },
+        "url": "{{baseUrl}}/api/ciudades"
+      }
+    },
+    {
+      "name": "Listar ciudades",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/ciudades" }
+    },
+    {
+      "name": "Crear estacion",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Estacion Centro\",\n  \"codigo\": \"MAN-CEN-01\",\n  \"ubicacion\": \"Centro de Manizales\",\n  \"estado\": \"ACTIVA\",\n  \"ciudadId\": {{ciudadId}}\n}" },
+        "url": "{{baseUrl}}/api/estaciones"
+      }
+    },
+    {
+      "name": "Estaciones por ciudad",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/estaciones/ciudad/{{ciudadId}}" }
+    },
+    {
+      "name": "Crear medicion",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"temperatura\": 31.4,\n  \"humedad\": 68,\n  \"presion\": 1012.8,\n  \"fecha\": \"2026-10-30T14:30:00\",\n  \"descripcion\": \"Medicion de la tarde\",\n  \"estacionId\": {{estacionId}},\n  \"tiposMedicionIds\": []\n}" },
+        "url": "{{baseUrl}}/api/registros-clima"
+      }
+    },
+    {
+      "name": "Mediciones por estacion",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/registros-clima/estacion/{{estacionId}}" }
+    },
+    {
+      "name": "Temperatura superior a 30",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/registros-clima/temperatura-superior?valor=30" }
+    },
+    {
+      "name": "Promedio de temperatura por ciudad",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/registros-clima/promedio/ciudad/{{ciudadId}}" }
+    },
+    {
+      "name": "Asignar rol a usuario",
+      "request": { "method": "POST", "url": "{{baseUrl}}/api/usuarios/{{usuarioId}}/roles/{{rolId}}" }
+    },
+    {
+      "name": "Usuarios por rol",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/usuarios/rol/ADMIN" }
+    },
+    {
+      "name": "Alertas por nivel",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/alertas/nivel/ALTA" }
+    },
+    {
+      "name": "Alertas activas por ciudad",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/alertas/activas/ciudad/{{ciudadId}}" }
+    }
+  ]
+}
